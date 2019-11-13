@@ -21,6 +21,15 @@ public class Assignment2 {
 		return count;
 	}
 
+	public static String reverse(String line) {
+		String result = "";
+		for (int i = line.length()-1; i >=0; i--) {
+			result+=line.charAt(i);
+		}
+		return result;
+	
+		
+	}
 
 	public static double basic_math(String line) { // Just for addition and subtraction
 		//String operators = "+-";
@@ -67,7 +76,52 @@ public class Assignment2 {
 	
 
 	public static String intermediate_math(String line) {
-		
+		int index = 0;
+		int before,current,after = 0;
+		while(index<line.length()){
+			if(line.charAt(index) == '*'){
+				char sign_of_former=' ' ;
+				int former_divider = 0,latter_divider = 0;
+				String former = reverse(line.substring(0,index));
+				for (int i = 0; i <former.length(); i++) {
+					char character = former.charAt(i);
+					if(!(48 <= character+0 && character+0<=57) && (character !='.')){ //Operator
+						former_divider = i;
+						sign_of_former = character;
+						break;
+					}
+				}			
+				double number1 = Double.parseDouble(reverse(former.substring(0,former_divider)));
+				char sign_of_latter=' ';
+				String latter = line.substring(index+1,line.length());
+				for (int i = 0; i <latter.length(); i++) {
+					char character = latter.charAt(i);
+					if(!(48 <= character+0 && character+0<=57) && (character !='.')){ //Operator
+						sign_of_latter = character;
+						latter_divider = i;
+						break;
+					}
+				}
+				System.out.println(counter(former.substring(0,former_divider),'.') == 0);
+				System.out.println(counter(latter.substring(0,latter_divider),'.') == 0);
+				boolean isdouble = 	(counter(former.substring(0,former_divider),'.') == 0) && (counter(latter.substring(0,latter_divider),'.') == 0);
+				double number2 = Double.parseDouble(latter.substring(0,latter_divider));
+				System.out.println(isdouble);
+				char sign_of_result = (sign_of_latter==sign_of_former)? '+' : '-';
+				
+				if(!isdouble){
+					double result = number2*number1;
+					System.out.println(reverse(former.substring(former_divider+1)) + sign_of_result +Double.toString(result) +"+"+ latter.substring(latter_divider+1));
+				}
+				else{
+					int result = (int) (number1*number2);
+					System.out.println(reverse(former.substring(former_divider+1)) + sign_of_result +Integer.toString(result) +"+"+ latter.substring(latter_divider+1));
+
+				}
+			}
+			index++;
+
+		}
 
 
 
@@ -125,8 +179,7 @@ public class Assignment2 {
 			calculation_line = calculation_line.replace(var3_name, Double.toString(var3_value));
 
 		}
-		System.out.println("result = "+basic_math(calculation_line));
-
+		System.out.println(intermediate_math("5+6-7*8.0+9+10"));
 		
 	
 	}
