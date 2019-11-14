@@ -1,4 +1,4 @@
-double x = 3 ;
-double y = 5.0;
-int z = 4;
-5+4-2+x-y-z+234+2-25234+2;
+double a = 7;
+int b=8;
+double c = 79.2 ;
+(2+ 4* 3 *(8-2)/ 3);

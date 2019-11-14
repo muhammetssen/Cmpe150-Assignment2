@@ -56,7 +56,7 @@ public class Assignment21{
 
         }
         
-        System.out.println(math_level1(math_level2("1.0+5/5*2+5+15*1/40.0-5")));
+        System.out.println((math_level1(math_level2(parant(calculation_line)))));
 }
 
 public static String remover(String line,char virus) {
@@ -106,7 +106,8 @@ public static String math_level1(String line) {
         if(line.charAt(0) =='+') { line = line.substring(1); continue;}
         if(line.charAt(0) =='-'){
             if(!line.contains("+")) {line = line.replace("-", "+"); isnegative=true; continue;}
-            line = line.substring(finder(line)+2)+line.substring(0, finder(line)+2); 
+            String temp = line;
+            line = temp.substring(finder(temp.substring(1))+1)+temp.substring(0, finder(temp.substring(1))+1); 
             if(!chechker(line.substring(1),'+') && !chechker(line.substring(1),'+')) break;
             
             continue;
@@ -201,5 +202,47 @@ return line;
 
 
 
+}
+
+
+public static String parant(String line) {
+
+    int current_index = 0;
+    while(line.contains("(")){
+        char current_char = line.charAt(current_index);
+        if(current_char == '('){
+            for (int i = current_index+1; i <line.length(); i++) {
+                if(line.charAt(i)=='('){
+                    break;
+                }
+            else if (line.charAt(i) == ')'){ // Got the pair
+                String result = math_level1(math_level2(line.substring(current_index+1,i)));
+                char before_sign = line.charAt(current_index-1);
+                if(result.charAt(0)=='-'){ // Answer is negative
+                    if(before_sign == '-'){
+                        result = result.substring(1);
+                        line = line.substring(0,current_index-1) +"+"+ result + line.substring(i+1);
+                    }
+                    else if(before_sign =='+'){
+                        line = line.substring(0,current_index-1) + result + line.substring(i+1);
+                    }
+                }
+                else{ // Answer is positive
+                    line = line.substring(0,current_index) + result + line.substring(i+1);
+
+                }
+
+
+
+                current_index = 0;
+                break;
+            
+            }
+            
+        }  
+        }
+        current_index++;
+    }
+    return line;
 }
 }
