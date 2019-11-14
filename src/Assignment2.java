@@ -102,27 +102,27 @@ public class Assignment2 {
 						break;
 					}
 				}
-				System.out.println(counter(former.substring(0,former_divider),'.') == 0);
-				System.out.println(counter(latter.substring(0,latter_divider),'.') == 0);
+				//System.out.println(counter(former.substring(0,former_divider),'.') == 0);
+				//System.out.println(counter(latter.substring(0,latter_divider),'.') == 0);
 				boolean isdouble = 	(counter(former.substring(0,former_divider),'.') == 0) && (counter(latter.substring(0,latter_divider),'.') == 0);
 				double number2 = Double.parseDouble(latter.substring(0,latter_divider));
-				System.out.println(isdouble);
+				//System.out.println(isdouble);
 				char sign_of_result = (sign_of_latter==sign_of_former)? '+' : '-';
 				
 				if(!isdouble){
 					double result = number2*number1;
-					System.out.println(reverse(former.substring(former_divider+1)) + sign_of_result +Double.toString(result) +"+"+ latter.substring(latter_divider+1));
+					System.out.println(reverse(former.substring(former_divider+1)) + sign_of_former +Double.toString(result) +sign_of_latter+ latter.substring(latter_divider+1));
 				}
 				else{
 					int result = (int) (number1*number2);
-					System.out.println(reverse(former.substring(former_divider+1)) + sign_of_result +Integer.toString(result) +"+"+ latter.substring(latter_divider+1));
-
+					line = (reverse(former.substring(former_divider+1)) + sign_of_former +Integer.toString(result) +sign_of_latter+ latter.substring(latter_divider+1));
 				}
+				System.out.println("New line is "+line);
 			}
 			index++;
 
 		}
-
+		System.out.println(basic_math(line));
 
 
 		return line;
@@ -179,7 +179,7 @@ public class Assignment2 {
 			calculation_line = calculation_line.replace(var3_name, Double.toString(var3_value));
 
 		}
-		System.out.println(intermediate_math("5+6-7*8.0+9+10"));
+		System.out.println(intermediate_math("0+18*2+1*9+5*4-5*2*1-6+0"));
 		
 	
 	}
